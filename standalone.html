@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Du lịch Hà Nội - Google Sites Embed</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom Styles that Tailwind can't easily do via CDN classes */
+        :root {
+            --linen: #faf0e6;
+            --antique-white: #faebd7;
+            --champagne: #f7e7ce;
+            --cosmic-latte: #fff8e7;
+            --bisque: #ffe4c4;
+            --cream: #fffdd0;
+            --ecru: #cdb891;
+            --khaki: #c3b091;
+            --brown-dark: #4e342e;
+            --bg-primary: var(--linen);
+            --bg-secondary: var(--cosmic-latte);
+            --text-primary: #2c2c2c;
+            --text-secondary: #555555;
+            --nav-bg: #3e2723;
+            --card-bg: #ffffff;
+            --transition: 0.5s ease;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #1a1a1a;
+            --bg-secondary: #242424;
+            --text-primary: #f5f5f5;
+            --text-secondary: #cccccc;
+            --nav-bg: #1b1b1b;
+            --card-bg: #2a2a2a;
+            --linen: #1a1a1a;
+            --cosmic-latte: #242424;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: background-color var(--transition), color var(--transition);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--khaki);
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: var(--nav-bg);
+            backdrop-filter: blur(10px);
+            padding: 0.8rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .logo { 
+            font-size: 1.8rem; 
+            font-weight: 700; 
+            color: #fff; 
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 1px;
+        }
+
+        nav ul { display: flex; list-style: none; gap: 25px; }
+        nav ul li a { color: #f5f5f5; font-weight: 500; font-size: 0.95rem; text-transform: none; letter-spacing: 1px; }
+        nav ul li a:hover { color: var(--ecru); }
+
+        .btn-book { 
+            background: var(--ecru); 
+            color: #3e2723; 
+            padding: 10px 22px; 
+            border-radius: 30px; 
+            font-weight: 700; 
+            border: none; 
+            cursor: pointer; 
+            transition: var(--transition);
+        }
+        .btn-book:hover { background: #fff; transform: translateY(-2px); }
+
+        .theme-toggle { 
+            cursor: pointer; 
+            font-size: 1.3rem; 
+            background: rgba(255,255,255,0.1); 
+            border: none; 
+            color: #fff; 
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .marquee {
+            margin-top: 65px;
+            background: var(--bisque);
+            color: #3e2723;
+            padding: 12px 0;
+            overflow: hidden;
+            white-space: nowrap;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border-bottom: 2px solid var(--ecru);
+            text-align: center;
+        }
+        .marquee-content {
+            display: flex;
+            width: max-content;
+            animation: marquee-weather 30s linear infinite;
+        }
+        .marquee-content span {
+            padding-right: 100px;
+        }
+        @keyframes marquee-weather {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .hero {
+            width: 100%;
+            max-width: 1600px;
+            height: 700px;
+            margin: 0 auto;
+            background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url("https://haycafe.vn/wp-content/uploads/2022/03/anh-Ho-Hoan-Kiem-ben-nhanh-phuong-do-1.jpg") center/cover no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            border-radius: 0 0 40px 40px;
+            overflow: hidden;
+        }
+        .hero-sub {
+            font-size: 12rem;
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+            color: rgba(255,255,255,0.98);
+            text-shadow: 0 10px 26px rgba(0,0,0,0.55);
+        }
+        .hero-main { 
+            font-size: 2.2rem; 
+            color: rgba(255,255,255,0.92);
+            text-shadow: 0 8px 22px rgba(0,0,0,0.55);
+            letter-spacing: 8px; 
+            font-weight: 400;
+            white-space: nowrap;
+        }
+
+        @media (max-width: 1200px) {
+            .hero-sub { font-size: 4.5rem; }
+            .hero-main { font-size: 2.8rem; }
+        }
+
+        @media (max-width: 768px) {
+            .hero-sub { font-size: 2.5rem; letter-spacing: 2px; }
+            .hero-main { font-size: 1.8rem; white-space: normal; }
+            header nav { display: none; }
+        }
+
+        section { padding: 80px 10%; }
+
+        .stat-item {
+            background: var(--card-bg);
+            padding: 45px 25px;
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.06);
+            transition: var(--transition);
+            border: 1px solid rgba(0,0,0,0.02);
+        }
+        .stat-item:hover { transform: translateY(-12px); box-shadow: 0 20px 50px rgba(0,0,0,0.12); border-color: var(--ecru); }
+
+        .flip-card { background-color: transparent; width: 100%; height: 450px; perspective: 1000px; cursor: pointer; }
+        .flip-card-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.8s; transform-style: preserve-3d; }
+        .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+        .flip-card-front, .flip-card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 30px; overflow: hidden; box-shadow: 0 15px 40px rgba(0,0,0,0.15); }
+        .flip-card-front img { width: 100%; height: 100%; object-fit: cover; }
+        .flip-card-front .overlay { position: absolute; bottom: 0; width: 100%; padding: 35px; background: linear-gradient(transparent, rgba(0,0,0,0.95)); color: white; font-size: 1.6rem; font-weight: 700; text-align: left; }
+        .flip-card-back { background-color: var(--nav-bg); color: white; transform: rotateY(180deg); display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 45px; }
+        .flip-card-back h3 { color: var(--ecru); margin-bottom: 25px; font-size: 2rem; }
+        .btn-detail { background: var(--ecru); color: #3e2723; border: none; padding: 14px 30px; border-radius: 35px; cursor: pointer; font-weight: 700; margin-top: 35px; transition: var(--transition); }
+
+        .news-slider { 
+            display: flex; 
+            gap: 40px; 
+            overflow-x: auto; 
+            padding: 25px 10px; 
+            scrollbar-width: thin;
+            scrollbar-color: var(--khaki) transparent;
+        }
+        .news-card { 
+            min-width: 400px; 
+            background: var(--card-bg); 
+            border-radius: 25px; 
+            overflow: hidden; 
+            box-shadow: 0 12px 35px rgba(0,0,0,0.07); 
+            transition: var(--transition);
+        }
+
+        @keyframes marquee-testimonials {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .animate-marquee-testimonials { animation: marquee-testimonials 40s linear infinite; }
+
+        .testimonial-card {
+            background: var(--card-bg);
+            border: 1px solid var(--ecru);
+            padding: 30px;
+            border-radius: 25px;
+            transition: var(--transition);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.04);
+            display: flex;
+            gap: 20px;
+            width: 450px;
+            flex-shrink: 0;
+            white-space: normal;
+        }
+
+        .contact-section {
+            background: var(--bg-secondary);
+            padding: 60px 10%;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 60px;
+        }
+        @media (max-width: 900px) {
+            .contact-section { grid-template-columns: 1fr; }
+        }
+
+        .contact-form-container, .quick-tips {
+            background: #fff;
+            padding: 50px;
+            border-radius: 35px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.05);
+        }
+
+        footer { background: #151515; color: #ccc; padding: 60px 10% 40px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 50px; }
+        @media (max-width: 800px) {
+            footer { grid-template-columns: 1fr; }
+        }
+        .copyright-bar { background: #151515; color: #888; padding: 20px 10%; border-top: 1px solid #222; text-align: center; font-size: 0.9rem; font-style: italic; }
+
+        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); z-index: 2000; display: flex; justify-content: center; align-items: center; padding: 30px; }
+        .modal-content { background: var(--bg-primary); max-width: 700px; width: 100%; border-radius: 30px; overflow: hidden; position: relative; }
+
+        .audio-btn { position: fixed; bottom: 45px; left: 45px; z-index: 1001; background: var(--nav-bg); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; box-shadow: 0 12px 30px rgba(0,0,0,0.4); border: 2px solid var(--ecru); }
+        .chatbot { position: fixed; bottom: 45px; right: 45px; z-index: 1001; }
+        .chat-btn { background: var(--nav-bg); color: white; width: 70px; height: 70px; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; box-shadow: 0 12px 30px rgba(0,0,0,0.4); font-size: 2rem; border: 2px solid var(--ecru); }
+        .chat-window { position: absolute; bottom: 90px; right: 0; width: 400px; background: var(--card-bg); border-radius: 30px; box-shadow: 0 20px 60px rgba(0,0,0,0.25); display: flex; flex-direction: column; overflow: hidden; border: 1px solid rgba(0,0,0,0.1); }
+        
+        .chat-msg { padding: 14px 20px; border-radius: 20px; max-width: 88%; font-size: 1rem; line-height: 1.6; margin-bottom: 10px; }
+        .msg-bot { background: #f0f0f0; color: #333; align-self: flex-start; border-bottom-left-radius: 4px; }
+        .msg-user { background: var(--nav-bg); color: white; align-self: flex-end; border-bottom-right-radius: 4px; }
+
+        .fade-in { opacity: 0; transform: translateY(50px); transition: 1.2s cubic-bezier(0.22, 1, 0.36, 1); }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <!-- React and Libraries via ESM.sh -->
+    <script type="module">
+        import React, { useState, useEffect, useRef, StrictMode } from 'https://esm.sh/react@19';
+        import { createRoot } from 'https://esm.sh/react-dom@19/client';
+        import { motion } from 'https://esm.sh/motion/react';
+        import { Star, MapPin, Camera, Utensils, Landmark, Heart, Moon, Sun, Music, MessageCircle, X } from 'https://esm.sh/lucide-react';
+
+        // --- Data ---
+        const destinations = [
+            { name: "Hồ Hoàn Kiếm", img: "https://disantrangan.vn/wp-content/uploads/2021/05/ho_hoan_kiem_02.jpg", desc: "Trái tim của Thủ đô, nơi gắn liền với truyền thuyết trả gươm báu cho Rùa Thần.", mapUrl: "https://www.google.com/maps/search/?api=1&query=Hồ+Hoàn+Kiếm" },
+            { name: "Văn Miếu", img: "https://img1.kienthucvui.vn/uploads/2019/08/15/cong-van-mieu-quoc-tu-giam-co-xua_103832628.jpg", desc: "Trường đại học đầu tiên của Việt Nam, biểu tượng của tinh thần hiếu học.", mapUrl: "https://www.google.com/maps/search/?api=1&query=Văn+Miếu+Quốc+Tử+Giám" },
+            { name: "Phố Cổ", img: "https://static.vinwonders.com/production/pho-co-ha-noi-1.jpg", desc: "Khu vực 36 phố phường sầm uất với những ngôi nhà ống cổ kính.", mapUrl: "https://www.google.com/maps/search/?api=1&query=Phố+Cổ+Hà+Nội" },
+            { name: "Lăng Bác", img: "https://img1.kienthucvui.vn/uploads/2019/07/19/hinh-anh-lang-bac-ho-o-ha-noi_112812656.jpg", desc: "Nơi an nghỉ cuối cùng của Chủ tịch Hồ Chí Minh vĩ đại.", mapUrl: "https://www.google.com/maps/search/?api=1&query=Lăng+Chủ+tịch+Hồ+Chí+Minh" },
+            { name: "Hồ Tây", img: "https://phunugioi.com/wp-content/uploads/2020/10/hinh-anh-ho-tay-dep-1-1536x1083.jpg", desc: "Hồ nước tự nhiên lớn nhất Hà Nội, mang vẻ đẹp lãng mạn.", mapUrl: "https://www.google.com/maps/search/?api=1&query=Hồ+Tây+Hà+Nội" },
+            { name: "Hoàng Thành Thăng Long", img: "https://media-cdn-v2.laodong.vn/Storage/NewsPortal/2023/5/7/1189286/Anh-Hoang-Thanh-Than-11.jpg", desc: "Di sản Văn hóa Thế giới với bề dày lịch sử hơn 1300 năm.", mapUrl: "https://www.google.com/maps/search/?api=1&query=Hoàng+Thành+Thăng+Long" },
+            { name: "Chùa Trấn Quốc", img: "https://vcdn1-dulich.vnecdn.net/2021/04/22/Chua-Tran-Quoc-1-1619084224.jpg", desc: "Ngôi chùa cổ nhất Hà Nội với hơn 1500 năm tuổi.", mapUrl: "https://www.google.com/maps/search/?api=1&query=Chùa+Trấn+Quốc" },
+            { name: "Nhà hát lớn Hà Nội", img: "https://static.vinwonders.com/production/nha-hat-lon-ha-noi-1.jpg", desc: "Công trình kiến trúc tiêu biểu mang đậm phong cách Pháp.", mapUrl: "https://www.google.com/maps/search/?api=1&query=Nhà+hát+Lớn+Hà+Nội" },
+            { name: "Cầu Long Biên", img: "https://media.vov.vn/sites/default/files/styles/large/public/2022-02/cau_long_bien_1.jpg", desc: "Chứng nhân lịch sử nối liền hai bờ sông Hồng.", mapUrl: "https://www.google.com/maps/search/?api=1&query=Cầu+Long+Biên" }
+        ];
+
+        const cuisines = [
+            { name: "Phở Bò", img: "https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43", desc: "Món ăn quốc hồn quốc túy với nước dùng thanh ngọt từ xương bò.", tag: "Tinh hoa" },
+            { name: "Bún Chả", img: "https://statics.vinpearl.com/bun-cha-ha-noi-3_1688011791.jpg", desc: "Thịt nướng thơm lừng trên than hồng ăn kèm nước chấm chua ngọt.", tag: "Truyền thống" },
+            { name: "Cà phê trứng", img: "https://statics.vinpearl.com/cafe-trung-ha-noi-so-1_1679647446.jpg", desc: "Vị béo ngậy của kem trứng hòa quyện cùng hương vị cà phê đắng.", tag: "Đặc sản" },
+            { name: "Bún đậu mắm tôm", img: "https://img5.thuthuatphanmem.vn/uploads/2021/11/24/cach-lam-bun-dau-mam-tom_101907385.jpg", desc: "Món ăn dân dã nhưng đầy sức hút với đậu hũ chiên vàng.", tag: "Dân dã" }
+        ];
+
+        const testimonials = [
+            { id: 1, name: "NGƯỜI YÊU HÀ NỘI", location: "Đà Nẵng", rating: 5, quote: "Hà Nội mùa thu đẹp đến nao lòng.", avatar: "😊" },
+            { id: 2, name: "CÔ HẰNG", location: "Hải Phòng", rating: 5, quote: "Phở Hà Nội thực sự là tinh hoa ẩm thực.", avatar: "😇" }
+        ];
+
+        // --- Components ---
+        const Counter = ({ target, suffix = "", duration = 2000, decimals = 0 }) => {
+            const [count, setCount] = useState(0);
+            const [hasStarted, setHasStarted] = useState(false);
+            const elementRef = useRef(null);
+
+            useEffect(() => {
+                const observer = new IntersectionObserver(([entry]) => { if (entry.isIntersecting) setHasStarted(true); }, { threshold: 0.5 });
+                if (elementRef.current) observer.observe(elementRef.current);
+                return () => observer.disconnect();
+            }, []);
+
+            useEffect(() => {
+                if (!hasStarted) return;
+                let startTime = null;
+                const step = (timestamp) => {
+                    if (!startTime) startTime = timestamp;
+                    const progress = Math.min((timestamp - startTime) / duration, 1);
+                    setCount(progress * target);
+                    if (progress < 1) window.requestAnimationFrame(step);
+                };
+                window.requestAnimationFrame(step);
+            }, [hasStarted, target, duration]);
+
+            return React.createElement('h3', { ref: elementRef, style: { color: "#c3b091", fontSize: "3.2rem", fontWeight: "bold" } }, count.toFixed(decimals).replace('.', ',') + suffix);
+        };
+
+        const SectionHeader = ({ title, highlight }) => (
+            React.createElement('div', { className: "text-center mb-32 relative py-10" },
+                React.createElement(motion.div, { initial: { opacity: 0, scale: 0.9 }, whileInView: { opacity: 1, scale: 1 }, viewport: { once: true }, className: "relative z-10" },
+                    React.createElement('h2', { className: "text-4xl md:text-6xl font-serif font-bold text-[#c3b091] inline-block" },
+                        title + " ",
+                        highlight && React.createElement('span', { className: "font-bold text-[#c3b091]" }, highlight)
+                    )
+                )
+            )
+        );
+
+        function App() {
+            const [theme, setTheme] = useState("light");
+            const [selectedDest, setSelectedDest] = useState(null);
+            const [isPlaying, setIsPlaying] = useState(false);
+            const [isChatOpen, setIsChatOpen] = useState(false);
+            const [chatMsgs, setChatMsgs] = useState([{ text: "Xin chào! Tôi là trợ lý ảo Hà Nội Guide.", type: "bot" }]);
+            const [chatInput, setChatInput] = useState("");
+            const [submitSuccess, setSubmitSuccess] = useState(false);
+            const audioRef = useRef(null);
+            const chatBodyRef = useRef(null);
+
+            useEffect(() => { document.body.setAttribute("data-theme", theme); }, [theme]);
+            useEffect(() => {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add("visible"); });
+                }, { threshold: 0.15 });
+                document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
+                return () => observer.disconnect();
+            }, []);
+
+            const askBot = (question) => {
+                setChatMsgs(prev => [...prev, { text: question, type: "user" }]);
+                setTimeout(() => {
+                    setChatMsgs(prev => [...prev, { text: "Tôi có thể giúp gì cho bạn về " + question + "?", type: "bot" }]);
+                }, 1000);
+            };
+
+            return (
+                React.createElement(React.Fragment, null,
+                    React.createElement('header', null,
+                        React.createElement('a', { href: "#", className: "logo flex items-center gap-3" },
+                            React.createElement('div', { className: "w-10 h-10 bg-[#c3b091] rounded-full flex items-center justify-center" }, React.createElement(Landmark, { color: "white", size: 24 })),
+                            React.createElement('span', null, "Du lịch Hà Nội")
+                        ),
+                        React.createElement('nav', null,
+                            React.createElement('ul', null,
+                                React.createElement('li', null, React.createElement('a', { href: "#home" }, "Trang chủ")),
+                                React.createElement('li', null, React.createElement('a', { href: "#intro" }, "Giới thiệu")),
+                                React.createElement('li', null, React.createElement('a', { href: "#destinations" }, "Điểm đến"))
+                            )
+                        ),
+                        React.createElement('div', { className: "header-btns" },
+                            React.createElement('button', { className: "btn-book" }, "Đặt Chuyến Đi"),
+                            React.createElement('button', { className: "theme-toggle", onClick: () => setTheme(theme === "light" ? "dark" : "light") }, theme === "light" ? "🌙" : "☀️")
+                        )
+                    ),
+
+                    React.createElement('div', { className: "marquee" },
+                        React.createElement('div', { className: "marquee-content" },
+                            React.createElement('span', null, "HÀ NỘI HÔM NAY: 24°C - Trời nắng nhẹ - Độ ẩm 65%... • HÀ NỘI HÔM NAY: 24°C - Trời nắng nhẹ - Độ ẩm 65%...")
+                        )
+                    ),
+
+                    React.createElement('section', { className: "hero", id: "home" },
+                        React.createElement('div', { className: "hero-content" },
+                            React.createElement('h2', { className: "hero-sub" }, "Du lịch Hà Nội"),
+                            React.createElement('h1', { className: "hero-main" }, "TRÁI TIM VIỆT NAM")
+                        )
+                    ),
+
+                    React.createElement('section', { id: "intro", className: "fade-in" },
+                        React.createElement(SectionHeader, { title: "Vẻ Đẹp Ngàn Năm" }),
+                        React.createElement('div', { className: "intro-content" },
+                            React.createElement('p', { className: "text-lg mb-12" }, "Hà Nội — thủ đô của Việt Nam — là một thành phố ngàn tuổi với bề dày lịch sử và văn hóa sâu sắc."),
+                            React.createElement('div', { className: "stats" },
+                                React.createElement('div', { className: "stat-item", style: { background: "#3e2723", color: "#fff" } }, React.createElement(Counter, { target: 1010 }), React.createElement('p', null, "Năm lịch sử")),
+                                React.createElement('div', { className: "stat-item", style: { background: "#3e2723", color: "#fff" } }, React.createElement(Counter, { target: 8.5, suffix: "M", decimals: 1 }), React.createElement('p', null, "Dân số"))
+                            )
+                        )
+                    ),
+
+                    React.createElement('section', { id: "destinations", className: "fade-in" },
+                        React.createElement(SectionHeader, { title: "Điểm Đến", highlight: "Tuyệt Vời" }),
+                        React.createElement('div', { className: "dest-grid" },
+                            destinations.map((d, i) => (
+                                React.createElement('div', { key: i, className: "flip-card", onClick: () => setSelectedDest(d) },
+                                    React.createElement('div', { className: "flip-card-inner" },
+                                        React.createElement('div', { className: "flip-card-front" }, React.createElement('img', { src: d.img, referrerPolicy: "no-referrer" }), React.createElement('div', { className: "overlay" }, d.name)),
+                                        React.createElement('div', { className: "flip-card-back" }, React.createElement('h3', null, d.name), React.createElement('p', null, d.desc), React.createElement('button', { className: "btn-detail" }, "Xem chi tiết"))
+                                    )
+                                )
+                            ))
+                        )
+                    ),
+
+                    React.createElement('footer', null,
+                        React.createElement('div', null, React.createElement('h4', null, "Du lịch Hà Nội"), React.createElement('p', null, "Khám phá vẻ đẹp Thủ đô.")),
+                        React.createElement('div', null, React.createElement('h4', null, "Chính sách"), React.createElement('ul', null, React.createElement('li', null, React.createElement('a', { href: "#" }, "Bảo mật")))),
+                        React.createElement('div', null, React.createElement('h4', null, "Liên hệ"), React.createElement('p', null, "📍 36 Phố Cổ, Hà Nội"))
+                    ),
+                    React.createElement('div', { className: "copyright-bar" }, React.createElement('p', null, "@2026 Du lịch Hà Nội. Tất cả các quyền đã được đăng ký.")),
+
+                    selectedDest && React.createElement('div', { className: "modal" },
+                        React.createElement('div', { className: "modal-content" },
+                            React.createElement('span', { className: "close-modal", onClick: () => setSelectedDest(null) }, "×"),
+                            React.createElement('div', { className: "modal-body" },
+                                React.createElement('h2', { className: "text-3xl mb-4" }, selectedDest.name),
+                                React.createElement('img', { src: selectedDest.img, className: "w-full rounded-xl mb-4" }),
+                                React.createElement('p', null, selectedDest.desc)
+                            )
+                        )
+                    ),
+
+                    React.createElement('div', { className: "chatbot" },
+                        React.createElement('div', { className: "chat-btn", onClick: () => setIsChatOpen(!isChatOpen) }, "💬"),
+                        isChatOpen && React.createElement('div', { className: "chat-window" },
+                            React.createElement('div', { className: "chat-header" }, React.createElement('span', null, "Hanoi Guide AI")),
+                            React.createElement('div', { className: "chat-body", style: { padding: "20px", height: "200px", overflowY: "auto" } },
+                                chatMsgs.map((m, i) => React.createElement('div', { key: i, className: "chat-msg msg-" + m.type }, m.text))
+                            ),
+                            React.createElement('div', { className: "p-4 border-t flex" },
+                                React.createElement('input', { 
+                                    className: "flex-1 bg-gray-100 rounded-full px-4 py-2 outline-none", 
+                                    placeholder: "Hỏi gì đó...",
+                                    value: chatInput,
+                                    onChange: (e) => setChatInput(e.target.value),
+                                    onKeyPress: (e) => { if(e.key === "Enter") { askBot(chatInput); setChatInput(""); } }
+                                })
+                            )
+                        )
+                    )
+                )
+            );
+        }
+
+        createRoot(document.getElementById('root')).render(React.createElement(StrictMode, null, React.createElement(App)));
+    </script>
+</body>
+</html>

@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Du lịch Hà Nội - Trái tim Việt Nam</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS 3 CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            accent: '#c3b091',
+                            'bg-secondary': '#fff8e7',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* CSS VARIABLES & CORE STYLES */
+        :root {
+            --linen: #faf0e6;
+            --antique-white: #faebd7;
+            --champagne: #f7e7ce;
+            --cosmic-latte: #fff8e7;
+            --bisque: #ffe4c4;
+            --cream: #fffdd0;
+            --ecru: #cdb891;
+            --khaki: #c3b091;
+            --brown-dark: #4e342e;
+            --bg-primary: var(--linen);
+            --bg-secondary: var(--cosmic-latte);
+            --text-primary: #2c2c2c;
+            --text-secondary: #555555;
+            --nav-bg: #3e2723;
+            --card-bg: #ffffff;
+            --transition: 0.5s ease;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #1a1a1a;
+            --bg-secondary: #242424;
+            --text-primary: #f5f5f5;
+            --text-secondary: #cccccc;
+            --nav-bg: #1b1b1b;
+            --card-bg: #2a2a2a;
+            --linen: #1a1a1a;
+            --cosmic-latte: #242424;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: background-color var(--transition), color var(--transition);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; color: var(--khaki); }
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+
+        /* Header */
+        header {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            background: var(--nav-bg); backdrop-filter: blur(10px);
+            padding: 0.8rem 5%; display: flex; justify-content: space-between;
+            align-items: center; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .logo { font-size: 1.8rem; font-weight: 700; color: #fff; font-family: 'Playfair Display', serif; letter-spacing: 1px; }
+        nav ul { display: flex; list-style: none; gap: 25px; }
+        nav ul li a { color: #f5f5f5; font-weight: 500; font-size: 0.95rem; letter-spacing: 1px; }
+        nav ul li a:hover { color: var(--ecru); }
+
+        .header-btns { display: flex; align-items: center; gap: 15px; }
+        .btn-book { background: var(--ecru); color: #3e2723; padding: 10px 22px; border-radius: 30px; font-weight: 700; transition: var(--transition); cursor: pointer; }
+        .btn-book:hover { background: #fff; transform: translateY(-2px); }
+
+        .theme-toggle { cursor: pointer; font-size: 1.3rem; background: rgba(255,255,255,0.1); border: none; color: #fff; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+
+        /* Marquee */
+        .marquee { margin-top: 65px; background: var(--bisque); color: #3e2723; padding: 12px 0; overflow: hidden; white-space: nowrap; font-size: 0.9rem; font-weight: 600; border-bottom: 2px solid var(--ecru); }
+        .marquee-content { display: flex; width: max-content; animation: marquee-weather 30s linear infinite; }
+        .marquee-content span { padding-right: 100px; }
+        @keyframes marquee-weather { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        /* Hero */
+        .hero {
+            width: 100%; height: 700px; margin: 0 auto;
+            background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url("https://haycafe.vn/wp-content/uploads/2022/03/anh-Ho-Hoan-Kiem-ben-nhanh-phuong-do-1.jpg") center/cover no-repeat;
+            display: flex; justify-content: center; align-items: center; text-align: center; color: white; border-radius: 0 0 40px 40px;
+        }
+        .hero-sub { font-size: 12rem; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 5px; color: rgba(255,255,255,0.98); text-shadow: 0 10px 26px rgba(0,0,0,0.55); }
+        .hero-main { font-size: 2.2rem; color: rgba(255,255,255,0.92); text-shadow: 0 8px 22px rgba(0,0,0,0.55); letter-spacing: 8px; font-weight: 400; }
+
+        /* Sections */
+        section { padding: 80px 10%; }
+        .intro-content { max-width: 950px; margin: 0 auto; text-align: center; }
+        .stats { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 70px; gap: 30px; }
+        .stat-item { background: var(--card-bg); padding: 45px 25px; border-radius: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.06); transition: var(--transition); border: 1px solid rgba(0,0,0,0.02); }
+        .stat-item:hover { transform: translateY(-12px); box-shadow: 0 20px 50px rgba(0,0,0,0.12); border-color: var(--ecru); }
+
+        /* Destinations */
+        .flip-card { background-color: transparent; width: 100%; height: 450px; perspective: 1000px; cursor: pointer; }
+        .flip-card-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.8s; transform-style: preserve-3d; }
+        .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+        .flip-card-front, .flip-card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 30px; overflow: hidden; box-shadow: 0 15px 40px rgba(0,0,0,0.15); }
+        .flip-card-front img { width: 100%; height: 100%; object-fit: cover; }
+        .flip-card-front .overlay { position: absolute; bottom: 0; width: 100%; padding: 35px; background: linear-gradient(transparent, rgba(0,0,0,0.95)); color: white; font-size: 1.6rem; font-weight: 700; text-align: left; }
+        .flip-card-back { background-color: var(--nav-bg); color: white; transform: rotateY(180deg); display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 45px; }
+
+        /* News */
+        .news-slider { display: flex; gap: 40px; overflow-x: auto; padding: 25px 10px; scrollbar-width: thin; scroll-snap-type: x mandatory; }
+        .news-card { min-width: 400px; background: var(--card-bg); border-radius: 25px; overflow: hidden; box-shadow: 0 12px 35px rgba(0,0,0,0.07); transition: var(--transition); scroll-snap-align: start; }
+        .news-card img { width: 100%; height: 260px; object-fit: cover; }
+        .news-body { padding: 35px; }
+
+        /* Testimonials */
+        .testimonial-card { background: var(--card-bg); border: 1px solid var(--ecru); padding: 30px; border-radius: 25px; width: 450px; flex-shrink: 0; display: flex; gap: 20px; white-space: normal; }
+        @keyframes marquee-testimonials { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        .animate-marquee-testimonials { animation: marquee-testimonials 40s linear infinite; }
+
+        /* Contact */
+        .contact-section { background: var(--bg-secondary); padding: 60px 10%; display: grid; grid-template-columns: 1.5fr 1fr; gap: 60px; }
+        .contact-form-container { background: #fff; padding: 50px; border-radius: 35px; box-shadow: 0 20px 50px rgba(0,0,0,0.05); }
+        .form-group { margin-bottom: 25px; }
+        .form-group label { display: block; margin-bottom: 10px; font-weight: 600; }
+        .form-group input, .form-group textarea { width: 100%; padding: 15px 20px; border: 1px solid #eee; border-radius: 15px; background: #fcfcfc; outline: none; }
+
+        /* Footer */
+        footer { background: #151515; color: #ccc; padding: 60px 10% 40px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 50px; }
+        .copyright-bar { background: #151515; color: #888; padding: 20px 10%; border-top: 1px solid #222; text-align: center; }
+
+        /* Modal */
+        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); z-index: 2000; display: none; justify-content: center; align-items: center; padding: 30px; }
+        .modal-content { background: var(--bg-primary); max-width: 700px; width: 100%; border-radius: 30px; overflow: hidden; position: relative; }
+
+        /* Floating UI */
+        .audio-btn { position: fixed; bottom: 45px; left: 45px; z-index: 1001; background: var(--nav-bg); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; border: 2px solid var(--ecru); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .chatbot { position: fixed; bottom: 45px; right: 45px; z-index: 1001; }
+        .chat-btn { background: var(--nav-bg); color: white; width: 70px; height: 70px; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; border: 2px solid var(--ecru); font-size: 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .chat-window { position: absolute; bottom: 90px; right: 0; width: 400px; background: var(--card-bg); border-radius: 30px; display: none; flex-direction: column; overflow: hidden; border: 1px solid rgba(0,0,0,0.1); box-shadow: 0 20px 60px rgba(0,0,0,0.2); }
+        .chat-header { background: var(--nav-bg); color: white; padding: 18px; font-weight: 700; display: flex; justify-content: space-between; align-items: center; }
+        .chat-body { height: 220px; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 15px; background: var(--bg-secondary); }
+        .chat-msg { padding: 14px 20px; border-radius: 20px; max-width: 88%; }
+        .msg-bot { background: #fff; color: #333; align-self: flex-start; }
+        .msg-user { background: var(--nav-bg); color: white; align-self: flex-end; }
+
+        .info-frame { border: 1px solid var(--ecru); padding: 35px; border-radius: 25px; background: var(--card-bg); transition: var(--transition); box-shadow: 0 10px 40px rgba(0,0,0,0.04); }
+        .fade-in { opacity: 0; transform: translateY(50px); transition: 1.2s cubic-bezier(0.22, 1, 0.36, 1); }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 1200px) { .hero-sub { font-size: 4.5rem; } }
+        @media (max-width: 768px) {
+            .hero-sub { font-size: 2.5rem; }
+            .hero-main { font-size: 1.8rem; letter-spacing: 4px; }
+            .contact-section { grid-template-columns: 1fr; }
+            footer { grid-template-columns: 1fr; }
+            .stats { grid-template-columns: repeat(2, 1fr); }
+            header nav { display: none; }
+            .chat-window { width: 300px; }
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+        <div style="height: 100vh; display: flex; align-items: center; justify-content: center; font-family: sans-serif; color: #c3b091;">
+            <h2>Đang tải trang web...</h2>
+        </div>
+    </div>
+
+    <!-- React & Libraries -->
+    <script type="module">
+        import React, { useState, useEffect, useRef } from 'https://esm.sh/react@18';
+        import { createRoot } from 'https://esm.sh/react-dom@18/client';
+        import { motion } from 'https://esm.sh/framer-motion';
+        import * as Lucide from 'https://esm.sh/lucide-react';
+
+        const { Star, MapPin, Camera, Utensils, Landmark, Heart, Moon, Sun, Music, MessageCircle, X } = Lucide;
+
+        // --- DATA ---
+        const destinations = [
+          { name: "Hồ Hoàn Kiếm", img: "https://disantrangan.vn/wp-content/uploads/2021/05/ho_hoan_kiem_02.jpg", desc: "Trái tim của Thủ đô, nơi gắn liền với truyền thuyết trả gươm báu cho Rùa Thần. Hồ Hoàn Kiếm không chỉ là một danh lam thắng cảnh mà còn là biểu tượng văn hóa, lịch sử của người dân Hà Nội. Quanh hồ là các di tích như đền Ngọc Sơn, cầu Thê Húc, tháp Bút, đài Nghiên.", mapUrl: "https://www.google.com/maps/search/?api=1&query=Hồ+Hoàn+Kiếm" },
+          { name: "Văn Miếu", img: "https://img1.kienthucvui.vn/uploads/2019/08/15/cong-van-mieu-quoc-tu-giam-co-xua_103832628.jpg", desc: "Trường đại học đầu tiên của Việt Nam, biểu tượng của tinh thần hiếu học. Văn Miếu - Quốc Tử Giám được xây dựng từ năm 1070, là nơi thờ Khổng Tử và các bậc hiền triết. Khu di tích nổi bật với Khuê Văn Các và 82 bia Tiến sĩ vinh danh những người đỗ đạt.", mapUrl: "https://www.google.com/maps/search/?api=1&query=Văn+Miếu+Quốc+Tử+Giám" },
+          { name: "Phố Cổ", img: "https://static.vinwonders.com/production/pho-co-ha-noi-1.jpg", desc: "Khu vực 36 phố phường sầm uất với những ngôi nhà ống cổ kính và làng nghề truyền thống. Mỗi con phố ở đây thường bắt đầu bằng chữ 'Hàng', gắn liền với một mặt hàng kinh doanh đặc trưng. Phố Cổ là nơi lưu giữ linh hồn của Thăng Long xưa.", mapUrl: "https://www.google.com/maps/search/?api=1&query=Phố+Cổ+Hà+Nội" },
+          { name: "Lăng Bác", img: "https://img1.kienthucvui.vn/uploads/2019/07/19/hinh-anh-lang-bac-ho-o-ha-noi_112812656.jpg", desc: "Nơi an nghỉ cuối cùng của Chủ tịch Hồ Chí Minh vĩ đại. Lăng được xây dựng tại Quảng trường Ba Đình lịch sử, nơi Bác đã đọc bản Tuyên ngôn Độc lập. Đây là địa điểm thiêng liêng mà bất kỳ người con Việt Nam nào cũng muốn ghé thăm một lần.", mapUrl: "https://www.google.com/maps/search/?api=1&query=Lăng+Chủ+tịch+Hồ+Chí+Minh" },
+          { name: "Hồ Tây", img: "https://phunugioi.com/wp-content/uploads/2020/10/hinh-anh-ho-tay-dep-1-1536x1083.jpg", desc: "Hồ nước tự nhiên lớn nhất Hà Nội, mang vẻ đẹp lãng mạn và yên bình. Hồ Tây là điểm đến lý tưởng để ngắm hoàng hôn, thưởng thức bánh tôm hay dạo quanh các ngôi chùa cổ như chùa Trấn Quốc, phủ Tây Hồ. Không gian xanh mát ở đây mang lại cảm giác thư thái giữa lòng thành phố.", mapUrl: "https://www.google.com/maps/search/?api=1&query=Hồ+Tây+Hà+Nội" },
+          { name: "Hoàng Thành Thăng Long", img: "https://media-cdn-v2.laodong.vn/Storage/NewsPortal/2023/5/7/1189286/Anh-Hoang-Thanh-Than-11.jpg", desc: "Di sản Văn hóa Thế giới với bề dày lịch sử hơn 1300 năm. Đây là trung tâm chính trị, văn hóa quan trọng của Việt Nam qua nhiều triều đại. Khu di tích bao gồm các công trình kiến trúc đồ sộ và hàng triệu hiện vật khảo cổ quý giá minh chứng cho sự phát triển của kinh đô Thăng Long.", mapUrl: "https://www.google.com/maps/search/?api=1&query=Hoàng+Thành+Thăng+Long" },
+          { name: "Chùa Trấn Quốc", img: "https://vcdn1-dulich.vnecdn.net/2021/04/22/Chua-Tran-Quoc-1-1619084224.jpg?w=1200&h=0&q=100&dpr=1&fit=crop&s=W9v6Y-Y_Y_Y_Y_Y_Y_Y_Y_A", desc: "Ngôi chùa cổ nhất Hà Nội với hơn 1500 năm tuổi, nằm trên một hòn đảo nhỏ phía Đông Hồ Tây. Chùa Trấn Quốc nổi tiếng với kiến trúc uy nghiêm, tháp Bảo Tháp lục độ đài sen và cây bồ đề cổ thụ do Tổng thống Ấn Độ tặng.", mapUrl: "https://www.google.com/maps/search/?api=1&query=Chùa+Trấn+Quốc" },
+          { name: "Nhà hát lớn Hà Nội", img: "https://static.vinwonders.com/production/nha-hat-lon-ha-noi-1.jpg", desc: "Công trình kiến trúc tiêu biểu mang đậm phong cách Pháp tại trung tâm Thủ đô. Nhà hát Lớn là nơi diễn ra các chương trình nghệ thuật hàn lâm, sự kiện văn hóa quan trọng, là biểu tượng của sự sang trọng và tinh tế trong nghệ thuật.", mapUrl: "https://www.google.com/maps/search/?api=1&query=Nhà+hát+Lớn+Hà+Nội" },
+          { name: "Cầu Long Biên", img: "https://media.vov.vn/sites/default/files/styles/large/public/2022-02/cau_long_bien_1.jpg", desc: "Chứng nhân lịch sử nối liền hai bờ sông Hồng, được xây dựng từ thời Pháp thuộc. Cầu Long Biên mang vẻ đẹp hoài cổ, trầm mặc, là địa điểm yêu thích để ngắm nhìn nhịp sống bình dị của người dân và tận hưởng gió sông mát lành.", mapUrl: "https://www.google.com/maps/search/?api=1&query=Cầu+Long+Biên" }
+        ];
+
+        const cuisines = [
+          { name: "Phở Bò", img: "https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43", desc: "Món ăn quốc hồn quốc túy với nước dùng thanh ngọt từ xương bò ninh kỹ trong nhiều giờ. Bánh phở mềm dai kết hợp cùng thịt bò tái lăn hoặc chín, thêm chút hành lá và quẩy giòn tạo nên hương vị khó quên của buổi sáng Hà Nội.", tag: "Tinh hoa" },
+          { name: "Bún Chả", img: "https://statics.vinpearl.com/bun-cha-ha-noi-3_1688011791.jpg", desc: "Thịt nướng thơm lừng trên than hồng ăn kèm nước chấm chua ngọt và bún tươi. Từng miếng chả viên và chả miếng được tẩm ướp đậm đà, nướng cháy cạnh, hòa quyện cùng đu đủ xanh giòn sần sật và rau sống thanh mát.", tag: "Truyền thống" },
+          { name: "Cà phê trứng", img: "https://statics.vinpearl.com/cafe-trung-ha-noi-so-1_1679647446.jpg", desc: "Vị béo ngậy của kem trứng đánh bông mịn màng hòa quyện cùng hương vị cà phê đắng đặc trưng. Đây là thức uống sáng tạo độc đáo của người Hà Nội, mang lại cảm giác ấm áp và ngọt ngào như một món tráng miệng tinh tế.", tag: "Đặc sản" },
+          { name: "Bún đậu mắm tôm", img: "https://img5.thuthuatphanmem.vn/uploads/2021/11/24/cach-lam-bun-dau-mam-tom_101907385.jpg", desc: "Món ăn dân dã nhưng đầy sức hút với đậu hũ chiên vàng, thịt chân giò luộc, chả cốm và mắm tôm pha chanh ớt đánh sủi bọt. Một trải nghiệm ẩm thực đường phố không thể bỏ qua khi đến Hà Nội.", tag: "Dân dã" },
+          { name: "Chả cá Lã Vọng", img: "https://static.vinwonders.com/production/cha-ca-la-vong-ha-noi-4.jpg", desc: "Món ăn tinh tế hơn 100 năm tuổi của Hà Thành. Cá lăng được tẩm ướp gia vị bí truyền, nướng vàng rồi chiên nóng cùng hành hoa, thì là. Thưởng thức kèm bún, lạc rang và mắm tôm đậm đà, tạo nên hương vị di sản khó quên.", tag: "Di sản" },
+          { name: "Bánh mì Hà Nội", img: "https://images.squarespace-cdn.com/content/v1/5cb9ef147eb88c5caefa30b3/1615985478065-1SFJ74MJ7MJHQJFXLFCF/Vietnamese+Baguette+Her+86m2+by+Thuy+Dao+3.JPG", desc: "Sự kết hợp hoàn hảo giữa vỏ bánh giòn rụm và nhân pate, xá xíu, dưa góp đậm đà. Là món ăn đường phố biểu tượng, gắn liền với nhịp sống hối hả của Thủ đô, mang đến hương vị khó phai cho mọi thực khách.", tag: "Đường phố" },
+          { name: "Cốm làng Vòng", img: "https://media.cooky.vn/images/blog-2016/com-xanh-lang-vong-dac-san-ha-noi-duoc-lam-ra-the-nao-va-nhung-mon-ngon-voi-com-mua-thu-6.png", desc: "Thức quà tinh túy của mùa thu Hà Nội, mang hương vị lúa non dịu nhẹ và màu xanh ngọc bích đẹp mắt. Cốm được gói trong lá sen thơm, ăn kèm chuối tiêu chín cuốc, là biểu tượng của sự thanh tao và nhẹ nhàng trong văn hóa ẩm thực Thủ đô.", tag: "Quà thu" },
+          { name: "Bún Thang", img: "https://tse4.mm.bing.net/th/id/OIP.CKYrKi8AXqjKH-oK-aJ9zQHaHa?rs=1&pid=ImgDetMain&o=7&rm=3", desc: "Món ăn cầu kỳ và tinh tế nhất của người Hà Nội, ví như tác phẩm nghệ thuật đa sắc màu. Nước dùng trong vắt, ngọt thanh từ xương gà và tôm khô. Bát bún hội tụ đủ lườn gà xé, giò lụa, trứng tráng mỏng và nấm hương. Một chút mắm tôm và tinh dầu cà cuống tạo nên hương vị quý phái đặc trưng.", tag: "Cầu kỳ" }
+        ];
+
+        const testimonials = [
+          { id: 1, name: "NGƯỜI YÊU HÀ NỘI", location: "Đà Nẵng", rating: 5, quote: "Hà Nội mùa thu đẹp đến nao lòng, không khí thật trong lành và bình yên. Tôi đã có những phút giây thư giãn tuyệt vời tại Hồ Gươm.", avatar: "😊" },
+          { id: 2, name: "CÔ HẰNG", location: "Hải Phòng", rating: 5, quote: "Phở Hà Nội thực sự là tinh hoa ẩm thực, hương vị thanh tao khó cưỡng! Tôi đã thử nhiều nơi nhưng vị ở đây vẫn là đặc biệt nhất.", avatar: "😇" },
+          { id: 3, name: "XUÂN HIẾU", location: "Hà Nội", rating: 5, quote: "Dạo quanh phố cổ vào buổi tối là trải nghiệm tuyệt vời nhất tôi từng có! Những con phố nhỏ rêu phong luôn mang lại cảm giác hoài niệm.", avatar: "😋" },
+          { id: 4, name: "THẾ KIÊN", location: "TP. HCM", rating: 5, quote: "Kiến trúc Văn Miếu thật uy nghiêm và mang đậm giá trị lịch sử dân tộc. Một điểm đến không thể bỏ qua cho những ai yêu văn hóa.", avatar: "🌟" }
+        ];
+
+        // --- COMPONENTS ---
+        const Counter = ({ target, suffix = "", duration = 2000, decimals = 0 }) => {
+          const [count, setCount] = useState(0);
+          const [hasStarted, setHasStarted] = useState(false);
+          const elementRef = useRef(null);
+
+          useEffect(() => {
+            const observer = new IntersectionObserver(([entry]) => { if (entry.isIntersecting) setHasStarted(true); }, { threshold: 0.5 });
+            if (elementRef.current) observer.observe(elementRef.current);
+            return () => observer.disconnect();
+          }, []);
+
+          useEffect(() => {
+            if (!hasStarted) return;
+            let startTime = null;
+            const step = (timestamp) => {
+              if (!startTime) startTime = timestamp;
+              const progress = Math.min((timestamp - startTime) / duration, 1);
+              setCount(progress * target);
+              if (progress < 1) window.requestAnimationFrame(step);
+            };
+            window.requestAnimationFrame(step);
+          }, [hasStarted, target, duration]);
+
+          return <h3 ref={elementRef} style={{ color: "#c3b091", fontSize: "3.2rem", marginBottom: "12px" }}>{count.toFixed(decimals).replace('.', ',')}{suffix}</h3>;
+        };
+
+        const SectionHeader = ({ title, highlight }) => (
+          <div className="text-center mb-48 relative py-10">
+            <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} className="relative z-10">
+              <h2 className="text-4xl md:text-6xl font-serif font-bold text-[#c3b091] inline-block">
+                {title} {highlight && <span className="font-bold text-[#c3b091]">{highlight}</span>}
+              </h2>
+            </motion.div>
+          </div>
+        );
+
+        function App() {
+          const [theme, setTheme] = useState("light");
+          const [selectedDest, setSelectedDest] = useState(null);
+          const [isPlaying, setIsPlaying] = useState(false);
+          const [isChatOpen, setIsChatOpen] = useState(false);
+          const [chatMsgs, setChatMsgs] = useState([{ text: "Xin chào! Tôi là trợ lý ảo Hà Nội Guide. Tôi có thể giúp gì cho chuyến hành trình khám phá Thủ đô của bạn?", type: "bot" }]);
+          const [chatInput, setChatInput] = useState("");
+          const [submitSuccess, setSubmitSuccess] = useState(false);
+          const audioRef = useRef(null);
+          const chatBodyRef = useRef(null);
+
+          useEffect(() => { document.body.setAttribute("data-theme", theme); }, [theme]);
+
+          useEffect(() => {
+            const observer = new IntersectionObserver((entries) => {
+              entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add("visible"); });
+            }, { threshold: 0.15 });
+            document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
+            return () => observer.disconnect();
+          }, []);
+
+          useEffect(() => { if (chatBodyRef.current) chatBodyRef.current.scrollTop = chatBodyRef.current.scrollHeight; }, [chatMsgs]);
+
+          const toggleTheme = () => setTheme(prev => (prev === "light" ? "dark" : "light"));
+          const toggleAudio = () => {
+            if (!audioRef.current) return;
+            if (isPlaying) audioRef.current.pause(); else audioRef.current.play();
+            setIsPlaying(!isPlaying);
+          };
+
+          const askBot = (question) => {
+            setChatMsgs(prev => [...prev, { text: question, type: "user" }]);
+            setTimeout(() => {
+              let response = "Tôi là trợ lý ảo Hà Nội Guide. Bạn muốn biết thêm về " + question + " phải không?";
+              if (question.includes("Thời tiết")) response = "Hôm nay Hà Nội 24°C, nắng nhẹ, rất thích hợp để dạo quanh Hồ Gươm và thưởng thức kem Tràng Tiền!";
+              if (question.includes("Ăn gì")) response = "Phố Cổ nổi tiếng với Phở bò Lý Quốc Sư, Bún chả Hàng Quạt và Cà phê trứng Giảng. Bạn nên thử nhé!";
+              if (question.includes("Địa điểm")) response = "Bạn không nên bỏ lỡ Hồ Gươm, Văn Miếu và dạo quanh 36 phố phường bằng xích lô để cảm nhận trọn vẹn Thủ đô!";
+              setChatMsgs(prev => [...prev, { text: response, type: "bot" }]);
+            }, 1000);
+          };
+
+          return (
+            <>
+              <header>
+                <a href="#home" className="logo flex items-center gap-3 hover:opacity-80 transition-opacity">
+                  <div className="w-10 h-10 bg-[#c3b091] rounded-full flex items-center justify-center shadow-lg">
+                    <Landmark className="text-white" size={24} />
+                  </div>
+                  <span>Du lịch Hà Nội</span>
+                </a>
+                <nav>
+                  <ul>
+                    <li><a href="#home">Trang chủ</a></li>
+                    <li><a href="#intro">Giới thiệu</a></li>
+                    <li><a href="#destinations">Điểm đến</a></li>
+                    <li><a href="#cuisine">Ẩm thực</a></li>
+                    <li><a href="#news">Tin tức</a></li>
+                  </ul>
+                </nav>
+                <div className="header-btns">
+                  <a href="#contact-section" className="btn-book">Đặt Chuyến Đi</a>
+                  <button className="theme-toggle" onClick={toggleTheme}>{theme === "light" ? "🌙" : "☀️"}</button>
+                </div>
+              </header>
+
+              <div className="marquee">
+                <div className="marquee-content">
+                  <span>HÀ NỘI HÔM NAY: 24°C - Trời nắng nhẹ - Độ ẩm 65% - Rất phù hợp cho các hoạt động ngoài trời - Đừng quên chuẩn bị một chiếc áo khoác mỏng cho buổi tối quanh hồ... &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; • &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; HÀ NỘI HÔM NAY: 24°C - Trời nắng nhẹ - Độ ẩm 65% - Rất phù hợp cho các hoạt động ngoài trời - Đừng quên chuẩn bị một chiếc áo khoác mỏng cho buổi tối quanh hồ...</span>
+                  <span>HÀ NỘI HÔM NAY: 24°C - Trời nắng nhẹ - Độ ẩm 65% - Rất phù hợp cho các hoạt động ngoài trời - Đừng quên chuẩn bị một chiếc áo khoác mỏng cho buổi tối quanh hồ... &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; • &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; HÀ NỘI HÔM NAY: 24°C - Trời nắng nhẹ - Độ ẩm 65% - Rất phù hợp cho các hoạt động ngoài trời - Đừng quên chuẩn bị một chiếc áo khoác mỏng cho buổi tối quanh hồ...</span>
+                </div>
+              </div>
+
+              <section className="hero" id="home">
+                <div className="hero-content">
+                  <h2 className="hero-sub">Du lịch Hà Nội</h2>
+                  <h1 className="hero-main">TRÁI TIM VIỆT NAM</h1>
+                </div>
+              </section>
+
+              <section id="intro" className="fade-in">
+                <SectionHeader title="Vẻ Đẹp Ngàn Năm" />
+                <div className="intro-content">
+                  <p className="text-lg leading-relaxed mb-12">Hà Nội — thủ đô của Việt Nam — là một thành phố ngàn tuổi với bề dày lịch sử và văn hóa sâu sắc. Nằm bên dòng sông Hồng đỏ nặng phù sa, thành phố là sự hòa quyện tuyệt vời giữa kiến trúc cổ kính của 36 phố phường và nhịp sống hiện đại đầy năng động. Từ những mái ngói rêu phong của Phố cổ, tiếng rao hàng rong buổi sớm, đến ánh đèn lung linh phản chiếu trên Hồ Tây mỗi chiều tà — Hà Nội luôn khiến lòng người thổn thức và nhớ mãi.</p>
+                  
+                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "40px", marginTop: "50px", textAlign: "left" }}>
+                    <div className="info-frame">
+                      <h4 style={{ fontSize: "1.5rem", marginBottom: "15px" }}>📍 Vị trí địa lý</h4>
+                      <p style={{ fontSize: "1rem", color: "var(--text-secondary)" }}>Nằm ở trung tâm đồng bằng sông Hồng, Hà Nội tiếp giáp với các tỉnh Thái Nguyên, Vĩnh Phúc ở phía Bắc; Hà Nam, Hòa Bình ở phía Nam; Bắc Giang, Bắc Ninh, Hưng Yên ở phía Đông và Phú Thọ ở phía Tây.</p>
+                    </div>
+                    <div className="info-frame">
+                      <h4 style={{ fontSize: "1.5rem", marginBottom: "15px" }}>☀️ Khí hậu</h4>
+                      <p style={{ fontSize: "1rem", color: "var(--text-secondary)" }}>Hà Nội mang đặc trưng của khí hậu nhiệt đới gió mùa với 4 mùa rõ rệt. Mùa xuân ấm áp, mùa hè nóng ẩm, mùa thu mát mẻ và mùa đông se lạnh.</p>
+                    </div>
+                  </div>
+
+                  <div className="stats">
+                    <div className="stat-item" style={{ background: "#3e2723", color: "#fff" }}>
+                      <Counter target={1010} />
+                      <p style={{ color: "#c3b091" }}>Năm lịch sử</p>
+                    </div>
+                    <div className="stat-item" style={{ background: "#3e2723", color: "#fff" }}>
+                      <Counter target={8.5} suffix="M" decimals={1} />
+                      <p style={{ color: "#c3b091" }}>Dân số</p>
+                    </div>
+                    <div className="stat-item" style={{ background: "#3e2723", color: "#fff" }}>
+                      <Counter target={3359} />
+                      <p style={{ color: "#c3b091" }}>Diện tích (km²)</p>
+                    </div>
+                    <div className="stat-item" style={{ background: "#3e2723", color: "#fff" }}>
+                      <Counter target={36} />
+                      <p style={{ color: "#c3b091" }}>Phố phường</p>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <section id="destinations" className="fade-in">
+                <SectionHeader title="Điểm Đến" highlight="Tuyệt Vời" />
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-4">
+                  {destinations.map((d, i) => (
+                    <div key={i} className="flip-card" onClick={() => setSelectedDest(d)}>
+                      <div className="flip-card-inner">
+                        <div className="flip-card-front">
+                          <img src={d.img} alt={d.name} referrerPolicy="no-referrer" />
+                          <div className="overlay">{d.name}</div>
+                        </div>
+                        <div className="flip-card-back">
+                          <h3 style={{ color: "var(--ecru)", marginBottom: "25px", fontSize: "2rem" }}>{d.name}</h3>
+                          <p style={{ fontSize: "1rem", lineHeight: "1.8", opacity: "0.95" }}>{d.desc.substring(0, 130)}...</p>
+                          <button style={{ background: "var(--ecru)", color: "#3e2723", border: "none", padding: "14px 30px", borderRadius: "35px", cursor: "pointer", fontWeight: "700", marginTop: "35px" }}>Xem chi tiết</button>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </section>
+
+              <section id="cuisine" className="fade-in">
+                <SectionHeader title="Tinh Hoa" highlight="Ẩm Thực" />
+                <div className="flex flex-col gap-12 max-w-6xl mx-auto px-4">
+                  {cuisines.map((c, i) => (
+                    <motion.div 
+                      key={i} 
+                      initial={{ opacity: 0, x: i % 2 === 0 ? -50 : 50 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      className={`flex flex-col ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} gap-8 items-center bg-brand-bg-secondary p-6 rounded-[40px] shadow-sm hover:shadow-xl transition-all border border-brand-accent/5`}
+                      style={{ background: "var(--bg-secondary)" }}
+                    >
+                      <div className="w-full md:w-1/2 h-[350px] overflow-hidden rounded-[30px]">
+                        <img src={c.img} alt={c.name} className="w-full h-full object-cover hover:scale-110 transition-transform duration-700" referrerPolicy="no-referrer" />
+                      </div>
+                      <div className={`w-full md:w-1/2 ${i % 2 === 0 ? 'md:text-left' : 'md:text-right'} text-center space-y-6 px-8`}>
+                        <span className="inline-block px-8 py-2.5 bg-[#c3b091] text-white text-sm font-bold uppercase tracking-[0.2em] rounded-lg shadow-sm">{c.tag}</span>
+                        <h3 className="text-4xl md:text-5xl font-serif font-bold text-[#c3b091]">{c.name}</h3>
+                        <p className="text-[#555555] leading-relaxed text-lg text-center mx-auto max-w-lg">{c.desc}</p>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </section>
+
+              <section id="news" className="fade-in">
+                <SectionHeader title="Tin Tức" highlight="Mới Nhất" />
+                <div className="news-slider">
+                  {[
+                    { title: "Mùa thu Hà Nội - Thời điểm đẹp nhất năm", img: "https://media.mia.vn/uploads/blog-du-lich/tan-huong-mua-thu-ha-noi-dep-rung-dong-long-nguoi-02-1650256279.jpg", desc: "Khám phá những góc phố rợp lá vàng và hương hoa sữa nồng nàn đặc trưng của mùa thu Thủ đô." },
+                    { title: "Văn hóa cà phê vỉa hè tại Thủ đô", img: "https://media.kinhtetieudung.vn/thumb_x600x/images/2025/04/14/33-1744628230-9335546a-f9dc-4361-b7a0-5cd54fca89ee-9d7dce5d.jpg", desc: "Trải nghiệm nhịp sống chậm rãi bên ly cà phê trứng nổi tiếng tại các con ngõ nhỏ Phố Cổ." },
+                    { title: "Hà Nội về đêm: Sôi động và lung linh", img: "https://img5.thuthuatphanmem.vn/uploads/2021/12/06/hinh-anh-ha-noi-nhon-nhip-ve-dem_013057858.jpg", desc: "Những địa điểm không thể bỏ qua khi thành phố lên đèn, từ Tạ Hiện náo nhiệt đến phố đi bộ." }
+                  ].map((n, i) => (
+                    <div key={i} className="news-card">
+                      <img src={n.img} alt={n.title} referrerPolicy="no-referrer" />
+                      <div className="news-body">
+                        <h4 style={{ marginBottom: "18px", fontSize: "1.4rem", color: "var(--brown-dark)" }}>{n.title}</h4>
+                        <p>{n.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </section>
+
+              <section id="testimonials" className="fade-in" style={{ padding: "80px 0", overflow: "hidden", background: "var(--bg-secondary)" }}>
+                <SectionHeader title="Cảm nhận" highlight="du khách" />
+                <div className="marquee-container pause-on-hover" style={{ position: "relative", display: "flex", overflow: "hidden", padding: "20px 0" }}>
+                  <div className="marquee-content animate-marquee-testimonials" style={{ display: "flex", gap: "30px", whiteSpace: "nowrap" }}>
+                    {[...testimonials, ...testimonials, ...testimonials].map((t, i) => (
+                      <div key={i} className="testimonial-card">
+                        <div style={{ flexShrink: 0, width: "60px", height: "60px", borderRadius: "50%", background: "var(--bisque)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "2rem" }}>{t.avatar}</div>
+                        <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+                          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                            <h4 style={{ fontSize: "1.1rem", color: "var(--brown-dark)", margin: 0 }}>{t.name}</h4>
+                            <div style={{ display: "flex", gap: "2px" }}>
+                              {[...Array(5)].map((_, starIdx) => (
+                                <Star key={starIdx} size={12} fill={starIdx < t.rating ? "#c3b091" : "none"} stroke="#c3b091" />
+                              ))}
+                            </div>
+                          </div>
+                          <div style={{ display: "flex", alignItems: "center", gap: "5px", fontSize: "0.8rem", color: "var(--khaki)" }}>
+                            <MapPin size={12} /> {t.location}
+                          </div>
+                          <p style={{ fontSize: "0.95rem", fontStyle: "italic", color: "var(--text-secondary)", lineHeight: "1.5" }}>"{t.quote}"</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </section>
+
+              <section id="contact-section" className="contact-section fade-in">
+                <div className="contact-form-container">
+                  <h3 style={{ fontSize: "2.2rem", marginBottom: "15px", color: "var(--text-primary)" }}>Nhắn cho chúng mình</h3>
+                  <p style={{ color: "var(--text-secondary)", marginBottom: "35px" }}>Form này là demo UI. Khi bấm gửi, bạn sẽ nhận một thông báo xác nhận ngay trên trang.</p>
+                  <form onSubmit={(e) => { e.preventDefault(); setSubmitSuccess(true); setTimeout(() => setSubmitSuccess(false), 5000); }}>
+                    <div className="form-group"><label>Tên</label><input type="text" placeholder="Ví dụ: Minh Anh" required /></div>
+                    <div className="form-group"><label>Email</label><input type="email" placeholder="minhanh@email.com" required /></div>
+                    <div className="form-group"><label>Lời nhắn</label><textarea rows={4} placeholder="Bạn muốn đi Hà Nội mùa nào?" required></textarea></div>
+                    <div style={{ display: "flex", alignItems: "center", gap: "15px" }}>
+                      <button type="submit" className="btn-submit" style={{ background: "var(--nav-bg)", color: "white", padding: "15px 40px", borderRadius: "30px", fontWeight: "700", cursor: "pointer" }}>Gửi tin nhắn</button>
+                      {submitSuccess && <span style={{ color: "#2e7d32", fontWeight: 600 }}>✓ Đã gửi thành công</span>}
+                    </div>
+                  </form>
+                </div>
+                <div className="quick-tips" style={{ background: "#fff", padding: "50px", borderRadius: "35px", boxShadow: "0 20px 50px rgba(0,0,0,0.05)" }}>
+                  <h3 style={{ fontSize: "2.2rem", marginBottom: "25px" }} className="flex items-center gap-3"><Camera className="text-[#c3b091]" /> Quick tips</h3>
+                  <ul className="tips-list mt-6">
+                    <li className="flex items-start gap-3 mb-4"><div className="mt-1"><Star size={16} fill="#c3b091" stroke="#c3b091" /></div><span>Đi sớm để tránh đông tại các điểm di tích.</span></li>
+                    <li className="flex items-start gap-3 mb-4"><div className="mt-1"><Sun size={16} fill="#c3b091" stroke="#c3b091" /></div><span>Mang áo khoác mỏng buổi tối quanh hồ.</span></li>
+                    <li className="flex items-start gap-3 mb-4"><div className="mt-1"><Utensils size={16} fill="#c3b091" stroke="#c3b091" /></div><span>Thử combo "phở sáng - cafe trứng trưa".</span></li>
+                  </ul>
+                </div>
+              </section>
+
+              <footer>
+                <div>
+                  <h4 style={{ color: "#fff", marginBottom: "30px", fontSize: "1.5rem" }}>Du lịch Hà Nội</h4>
+                  <p>Khám phá vẻ đẹp ngàn năm văn hiến của Thủ đô yêu dấu.</p>
+                </div>
+                <div>
+                  <h4 style={{ color: "#fff", marginBottom: "30px", fontSize: "1.5rem" }}>Chính sách</h4>
+                  <ul><li><a href="#">Điều khoản sử dụng</a></li><li><a href="#">Chính sách bảo mật</a></li></ul>
+                </div>
+                <div>
+                  <h4 style={{ color: "#fff", marginBottom: "30px", fontSize: "1.5rem" }}>Liên hệ</h4>
+                  <p>📍 36 Phố Cổ, Hoàn Kiếm, Hà Nội</p>
+                  <p>📞 1900 1234</p>
+                </div>
+              </footer>
+
+              <div className="copyright-bar"><p>@2026 Du lịch Hà Nội. Tất cả các quyền đã được đăng ký.</p></div>
+
+              {selectedDest && (
+                <div className="modal" style={{ display: "flex" }}>
+                  <div className="modal-content">
+                    <span className="close-modal" onClick={() => setSelectedDest(null)} style={{ position: "absolute", top: "15px", right: "25px", fontSize: "3rem", cursor: "pointer", zIndex: 10 }}>&times;</span>
+                    <div className="modal-body" style={{ padding: "40px", paddingTop: "80px" }}>
+                      <h2 style={{ fontSize: "2.2rem", color: "var(--khaki)", marginBottom: "20px" }}>{selectedDest.name}</h2>
+                      <img src={selectedDest.img} style={{ width: "100%", height: "350px", objectFit: "cover", borderRadius: "20px", marginBottom: "25px" }} referrerPolicy="no-referrer" />
+                      <p style={{ lineHeight: 1.8, color: "var(--text-secondary)" }}>{selectedDest.desc}</p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              <div className="audio-btn" onClick={toggleAudio}>{isPlaying ? "⏸️" : "🎵"}</div>
+              <audio ref={audioRef} loop><source src="https://cdn.pixabay.com/audio/2024/05/28/audio_eab9a7a9f2.mp3" type="audio/mpeg" /></audio>
+
+              <div className="chatbot">
+                <div className="chat-btn" onClick={() => setIsChatOpen(!isChatOpen)}><MessageCircle size={32} /></div>
+                {isChatOpen && (
+                  <div className="chat-window" style={{ display: "flex" }}>
+                    <div className="chat-header"><span>Hanoi Guide AI</span><span style={{ cursor: "pointer", fontSize: "1.5rem" }} onClick={() => setIsChatOpen(false)}>&times;</span></div>
+                    <div className="chat-body" ref={chatBodyRef}>
+                      {chatMsgs.map((m, i) => <div key={i} className={`chat-msg msg-${m.type}`}>{m.text}</div>)}
+                    </div>
+                    <div className="chat-footer">
+                      <input type="text" placeholder="Nhập tin nhắn..." value={chatInput} onChange={(e) => setChatInput(e.target.value)} onKeyPress={(e) => { if (e.key === "Enter" && chatInput.trim()) { askBot(chatInput); setChatInput(""); } }} />
+                    </div>
+                  </div>
+                )}
+              </div>
+            </>
+          );
+        }
+
+        const root = createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
