@@ -17,19 +17,19 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
 
       - name: Install dependencies
-        run: npm install
+        # Dùng install thường thay vì ci vì bạn thiếu file lock
+        run: npm install 
 
       - name: Build project
-        run: npm run build
+        # Thêm CI=false để nó không dừng lại nếu có cảnh báo (warning)
+        run: CI=false npm run build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Đây là nơi chứa file sau khi build của Vite
-          path: './dist' 
+          path: './dist'
 
       - name: Deploy to GitHub Pages
         id: deployment
